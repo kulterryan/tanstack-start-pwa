@@ -38,6 +38,12 @@ export const Route = createRootRoute({
         href: '/manifest.json',
       },
     ],
+    scripts: [
+      {
+        src: '/registerSW.js',
+        defer: true,
+      },
+    ],
   }),
 
   shellComponent: RootDocument,

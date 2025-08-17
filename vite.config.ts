@@ -17,6 +17,7 @@ const config = defineConfig({
     }),
     viteReact(),
     VitePWA({
+      injectRegister: null, // we'll handle registration manually with an inline script
       registerType: 'autoUpdate',
       includeAssets: [
         'favicon.ico',

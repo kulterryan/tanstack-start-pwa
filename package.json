@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "vite dev --port 3000",
     "start": "node .output/server/index.mjs",
-    "build": "vite build",
+  "build": "vite build && node scripts/generate-sw.mjs",
     "serve": "vite preview",
     "test": "vitest run",
     "pwa-assets": "pwa-assets-generator"
@@ -30,6 +30,7 @@
     "@types/react-dom": "^19.0.3",
     "@vite-pwa/assets-generator": "^1.0.0",
     "@vitejs/plugin-react": "^4.3.4",
+  "workbox-build": "^7.3.0",
     "jsdom": "^26.0.0",
     "typescript": "^5.7.2",
     "vite": "^6.3.5",
