@@ -17,57 +17,38 @@ const config = defineConfig({
     }),
     viteReact(),
     VitePWA({
-      injectRegister: null, // we'll handle registration manually with an inline script
       registerType: 'autoUpdate',
-      includeAssets: [
-        'favicon.ico',
-        'robots.txt',
-        'apple-touch-icon-180x180.png',
-      ],
-      workbox: {
-        navigateFallbackDenylist: [/^\/api\//],
-        runtimeCaching: [
+      includeAssets: ['favicon.ico', 'robots.txt', 'apple-touch-icon.png'],
+      manifest: {
+        name: 'TanStack Start PWA',
+        short_name: 'TanStack Start',
+        description: 'A Progressive Web App built with TanStack Start',
+        theme_color: '#ffffff',
+        icons: [
           {
-            // Google Fonts stylesheets & files
-            urlPattern: /^https:\/\/(fonts\.googleapis\.com|fonts\.gstatic\.com)\/.*$/i,
-            handler: 'CacheFirst',
-            options: {
-              cacheName: 'google-fonts',
-              expiration: { maxEntries: 20, maxAgeSeconds: 60 * 60 * 24 * 365 },
-            },
+            src: '/pwa-192x192.png',
+            sizes: '192x192',
+            type: 'image/png',
           },
           {
-            // Static image assets
-            urlPattern: /\.(?:png|jpg|jpeg|svg|gif|webp)$/i,
-            handler: 'StaleWhileRevalidate',
-            options: {
-              cacheName: 'images',
-              expiration: { maxEntries: 60, maxAgeSeconds: 60 * 60 * 24 * 30 },
-            },
-          },
-          {
-            // API calls
-            urlPattern: /\/api\/.*$/i,
-            handler: 'NetworkFirst',
-            options: {
-              cacheName: 'api',
-              networkTimeoutSeconds: 10,
-              expiration: { maxEntries: 50, maxAgeSeconds: 60 * 5 },
-              cacheableResponse: { statuses: [0, 200] },
-            },
+            src: '/pwa-512x512.png',
+            sizes: '512x512',
+            type: 'image/png',
           },
         ],
       },
-      devOptions: {
-        enabled: true,
-        suppressWarnings: true,
-        navigateFallback: 'index.html',
-      },
-    })
+    }),
   ],
+  build: {
+    rollupOptions: {
+      external: [
+        'VitePWA',
+      ],
+    },
+  },
   server: {
-    allowedHosts: ['8dc38c91601b.ngrok-free.app']
-  }
+    allowedHosts: ['8dc38c91601b.ngrok-free.app'],
+  },
 })
 
 export default config

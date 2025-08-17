@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "vite dev --port 3000",
     "start": "node .output/server/index.mjs",
-  "build": "vite build && node scripts/generate-sw.mjs",
+  "build": "node scripts/generate-sw.mjs && vite build",
     "serve": "vite preview",
     "test": "vitest run",
     "pwa-assets": "pwa-assets-generator"

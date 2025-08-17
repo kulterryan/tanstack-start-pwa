@@ -4,7 +4,9 @@ import { existsSync, mkdirSync, copyFileSync } from 'node:fs'
 import { resolve } from 'node:path'
 
 const clientDist = resolve('.tanstack/start/build/client-dist')
-const outputPublic = resolve('.output/public')
+// Destination folder for the service worker that will be served at the app root
+// (previously copied to .output/public, but we now want it in the repo's public folder)
+const outputPublic = resolve('public')
 
 async function buildSW() {
   console.log('[workbox] generating service worker from', clientDist)
@@ -54,7 +56,7 @@ async function buildSW() {
 
   if (!existsSync(outputPublic)) mkdirSync(outputPublic, { recursive: true })
   copyFileSync(resolve(clientDist, 'sw.js'), resolve(outputPublic, 'sw.js'))
-  console.log('[workbox] copied sw.js to .output/public')
+  console.log('[workbox] copied sw.js to public/')
 }
 
 buildSW().catch(e => { console.error(e); process.exit(1) })
